@@ -3,9 +3,9 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  root: '.',           // root of project
-  publicDir: 'public', // <-- points Vite to public folder
+  root: '.',           // project root
+  publicDir: 'public', // points to public folder
   build: {
-    outDir: 'dist',    // build output
+    outDir: 'dist',    // output folder for Render
   },
 })
