@@ -1,26 +1,26 @@
 #!/bin/bash
 
-# Navigate automatically to project directory
-cd "/c/Users/SURYA/Documents/Web-Scanpro" || exit
+# Navigate to project directory
+cd "C:/Users/SURYA/Documents/Web-Scanpro" || exit
 
-# If no commit message provided, auto message with timestamp
-if [ -z "$1" ]; then
-  msg="Auto update - $(date +'%Y-%m-%d %H:%M:%S')"
-else
-  msg="$1"
+# Ask for commit message
+echo "Enter commit message (leave empty for auto message): "
+read msg
+
+# If message is empty, auto timestamp message
+if [ -z "$msg" ]; then
+    msg="Auto update on $(date +"%Y-%m-%d %H:%M:%S")"
 fi
 
-echo "Commit message: $msg"
-
+# Stage and commit changes
 git add -A
 git commit -m "$msg"
+
+# Make sure we are on main branch
 git branch -M main
 
-# Add remote only if missing
-if ! git remote | grep -q origin; then
-  git remote add origin https://github.com/vsurya2011/Web-Scanpro.git
-fi
-
+# Push to GitHub (safe update)
+git pull --rebase origin main
 git push -u origin main
 
-echo "✔ Successfully pushed to GitHub!"
+echo "🔥 Successfully pushed to GitHub!"
