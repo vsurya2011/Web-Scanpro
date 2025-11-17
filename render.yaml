@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: webscanpro-ui
+    env: node
+    plan: free
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm run preview"
+    rootDir: "."
+    autoDeploy: true
+    buildFilter:
+      paths:
+        - "src/"
+        - "public/"
+        - "package.json"
+    staticPublishPath: "dist"

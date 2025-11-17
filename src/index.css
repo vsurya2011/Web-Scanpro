@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent-color: #16a34a; /* default green */
+}
+
+/* small helpers */
+.card {
+  @apply bg-white dark:bg-gray-800 shadow p-4 rounded-xl;
+}
+.table-scroll { max-height: 420px; overflow:auto; }
+
+/* code block */
+pre {
+  @apply text-sm bg-gray-100 dark:bg-gray-900 p-3 rounded;
+  white-space: pre-wrap;
+  word-break: break-word;
+}

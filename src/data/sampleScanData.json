@@ -1,0 +1,40 @@
+{
+  "summary": {
+    "totalVulnerabilities": 9,
+    "riskScore": 72,
+    "byType": [
+      {"type":"SQLi","count":3},
+      {"type":"XSS","count":4},
+      {"type":"IDOR","count":2}
+    ],
+    "severity": {"High":3,"Medium":4,"Low":2}
+  },
+  "vulnerabilities": [
+    {
+      "id":"vuln-1",
+      "type":"SQLi",
+      "url":"/login.php",
+      "parameter":"username",
+      "payload":"' OR '1'='1",
+      "mlConfidence":0.91,
+      "severity":"High",
+      "status":"Open",
+      "request":"POST /login.php HTTP/1.1\\nHost: example.com\\nContent-Type: application/x-www-form-urlencoded\\n\\nusername=' OR '1'='1&password=any",
+      "response":"HTTP/1.1 200 OK\\nSet-Cookie: sessionid=abcd1234; Path=/; HttpOnly",
+      "mitigation":"Use parameterized queries or stored procedures. Validate and sanitize inputs."
+    },
+    {
+      "id":"vuln-2",
+      "type":"XSS",
+      "url":"/search",
+      "parameter":"q",
+      "payload":"<script>alert(1)</script>",
+      "mlConfidence":0.78,
+      "severity":"Medium",
+      "status":"Open",
+      "request":"GET /search?q=<script>alert(1)</script>",
+      "response":"HTTP/1.1 200 OK\\n... page reflects input",
+      "mitigation":"Escape and encode user input before rendering. Use CSP."
+    }
+  ]
+}
